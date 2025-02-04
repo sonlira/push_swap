@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:18:58 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/03 20:27:44 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/04 22:04:03 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ t_stack	*init_stack(int argc, char **argv);
 
 t_node	*new_node(int value);
 void	free_stack(t_stack **stack);
+int		find_min(t_stack *stack);
 void	print_stack(t_stack *stack);
 
 void	swap(t_stack *stack);
 void	push(t_stack *orig, t_stack *dest);
 void	rotate(t_stack *stack);
 void	reverse_rotate(t_stack *stack);
+
+void	sort_small(t_stack *stack);
 
 #endif

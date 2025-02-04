@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:41 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/03 20:37:18 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/04 22:06:05 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	rotate(t_stack *stack)
 
 void	reverse_rotate(t_stack *stack)
 {
-	t_node *last_node;
-	t_node *penultimate_node;
+	t_node	*last_node;
+	t_node	*penultimate_node;
 
 	if (!stack || stack->size < 2)
 		return ;

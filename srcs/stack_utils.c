@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:51 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/03 19:05:22 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/04 22:03:44 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,27 @@ void	print_stack(t_stack *stack)
 	node = stack->top;
 	while (node)
 	{
-		printf("%d -> ", node->value);
+		ft_putnbr_fd(node->value, 1);
+		ft_putstr_fd(" -> ", 1);
 		node = node->next;
 	}
-	printf("NULL\n");
+	ft_putendl_fd("NULL", 1);
+}
+
+int	find_min(t_stack *stack)
+{
+	t_node	*nodo;
+	int		min_value;
+
+	if (!stack || !stack->top)
+		return (INT_MAX);
+	nodo = stack->top;
+	min_value = nodo->value;
+	while (nodo)
+	{
+		if (min_value > nodo->value)
+			min_value = nodo->value;
+		nodo = nodo->next;
+	}
+	return (min_value);
 }
