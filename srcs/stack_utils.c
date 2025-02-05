@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:51 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/04 22:03:44 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:34:53 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	find_min(t_stack *stack)
 	int		min_value;
 
 	if (!stack || !stack->top)
-		return (INT_MAX);
+		return (-1);
 	nodo = stack->top;
 	min_value = nodo->value;
 	while (nodo)
@@ -68,4 +68,21 @@ int	find_min(t_stack *stack)
 		nodo = nodo->next;
 	}
 	return (min_value);
+}
+
+int	find_min_position(t_stack *stack, int min_value)
+{
+	t_node	*current;
+	int		rotations;
+
+	if (!stack || !stack->top)
+		return (-1);
+	rotations = 0;
+	current = stack->top;
+	while (current->value != min_value)
+	{
+		current = current->next;
+		rotations++;
+	}
+	return (rotations);
 }
