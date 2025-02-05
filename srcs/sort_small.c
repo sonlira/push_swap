@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:48 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/04 22:46:06 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:19:31 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	sort_4(t_stack *stack_a, t_stack *stack_b)
 
 void	sort_5(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min_valu;
+	int	min_value;
 
-	min_valu = find_min(stack_a);
-	while (stack_a->top->value != min_valu)
+	min_value = find_min(stack_a);
+	while (stack_a->top->value != min_value)
 		rotate(stack_a);
 	push(stack_a, stack_b);
 	sort_4(stack_a, stack_b);
@@ -71,25 +71,18 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 
 void	sort_small(t_stack *stack_a)
 {
-	t_stack	*stack_b;
+	t_stack	stack_b;
 
+	stack_b.top = NULL;
+	stack_b.size = 0;
 	if (!stack_a || stack_a->size < 2)
 		return ;
 	if (stack_a->size == 2)
 		sort_2(stack_a);
 	else if (stack_a->size == 3)
 		sort_3(stack_a);
+	else if (stack_a->size == 4)
+		sort_4(stack_a, &stack_b);
 	else
-	{
-		stack_b = malloc(sizeof(stack_b));
-		if (!stack_b)
-			return ;
-		stack_b->top = NULL;
-		stack_b->size = 0;
-		if (stack_a->size == 4)
-			sort_4(stack_a, stack_b);
-		else
-			sort_5(stack_a, stack_b);
-		free_stack(&stack_b);
-	}
+		sort_5(stack_a, &stack_b);
 }
