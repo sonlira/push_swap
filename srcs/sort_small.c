@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:48 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/05 13:19:31 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:46:20 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,19 @@ void	sort_3(t_stack *stack)
 void	sort_4(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min_value;
+	int	rotations;
 
 	min_value = find_min(stack_a);
+	rotations = find_min_position(stack_a, min_value);
+	if (rotations == -1)
+		return ;
 	while (stack_a->top->value != min_value)
-		rotate(stack_a);
+	{
+		if (rotations <= stack_a->size / 2)
+			rotate(stack_a);
+		else
+			reverse_rotate(stack_a);
+	}
 	push(stack_a, stack_b);
 	sort_3(stack_a);
 	push(stack_b, stack_a);
@@ -60,10 +69,19 @@ void	sort_4(t_stack *stack_a, t_stack *stack_b)
 void	sort_5(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min_value;
+	int	rotations;
 
 	min_value = find_min(stack_a);
+	rotations = find_min_position(stack_a, min_value);
+	if (rotations == -1)
+		return ;
 	while (stack_a->top->value != min_value)
-		rotate(stack_a);
+	{
+		if (rotations <= stack_a->size / 2)
+			rotate(stack_a);
+		else
+			reverse_rotate(stack_a);
+	}
 	push(stack_a, stack_b);
 	sort_4(stack_a, stack_b);
 	push(stack_b, stack_a);
