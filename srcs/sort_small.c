@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:48 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/05 14:46:20 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:11:06 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sort_2(t_stack *stack)
 {
 	if (stack->top->value > stack->top->next->value)
-		swap(stack);
+		swap(stack, "sa\n");
 }
 
 void	sort_3(t_stack *stack)
@@ -29,19 +29,19 @@ void	sort_3(t_stack *stack)
 	c = b->next;
 	if (a->value < c->value && b->value > c->value)
 	{
-		swap(stack);
-		rotate(stack);
+		swap(stack, "sa\n");
+		rotate(stack, "ra\n");
 	}
 	else if (a->value > b->value && a->value < c->value)
-		swap(stack);
+		swap(stack, "sa\n");
 	else if (a->value < b->value && a->value > c->value)
-		reverse_rotate(stack);
+		reverse_rotate(stack, "rra\n");
 	else if (a->value > c->value && b->value < c->value)
-		rotate(stack);
+		rotate(stack, "ra\n");
 	else if (a->value > b->value && b->value > c->value)
 	{
-		swap(stack);
-		reverse_rotate(stack);
+		swap(stack, "sa\n");
+		reverse_rotate(stack, "rra\n");
 	}
 }
 
@@ -57,13 +57,13 @@ void	sort_4(t_stack *stack_a, t_stack *stack_b)
 	while (stack_a->top->value != min_value)
 	{
 		if (rotations <= stack_a->size / 2)
-			rotate(stack_a);
+			rotate(stack_a, "ra\n");
 		else
-			reverse_rotate(stack_a);
+			reverse_rotate(stack_a, "rra\n");
 	}
-	push(stack_a, stack_b);
+	push(stack_a, stack_b, "pb\n");
 	sort_3(stack_a);
-	push(stack_b, stack_a);
+	push(stack_b, stack_a, "pa\n");
 }
 
 void	sort_5(t_stack *stack_a, t_stack *stack_b)
@@ -78,13 +78,13 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 	while (stack_a->top->value != min_value)
 	{
 		if (rotations <= stack_a->size / 2)
-			rotate(stack_a);
+			rotate(stack_a, "ra\n");
 		else
-			reverse_rotate(stack_a);
+			reverse_rotate(stack_a, "rra\n");
 	}
-	push(stack_a, stack_b);
+	push(stack_a, stack_b, "pb\n");
 	sort_4(stack_a, stack_b);
-	push(stack_b, stack_a);
+	push(stack_b, stack_a, "pa\n");
 }
 
 void	sort_small(t_stack *stack_a)
