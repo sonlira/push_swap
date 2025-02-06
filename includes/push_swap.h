@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:18:58 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/06 17:07:15 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/06 23:30:00 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_stack	*init_stack(int argc, char **argv);
 t_node	*new_node(int value);
 void	free_stack(t_stack **stack);
 int		find_min(t_stack *stack);
+int		find_min_position(t_stack *stack, int min_value);
 void	print_stack(t_stack *stack);
 
 void	swap(t_stack *stack, char *operator);
