@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:18:58 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/06 23:30:00 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:49:12 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,9 @@ void	rotate(t_stack *stack, char *operator);
 void	reverse_rotate(t_stack *stack, char *operator);
 
 void	sort_small(t_stack *stack);
+void	sort_large(t_stack *stack);
+void	move_chunks_to_b(t_stack *s_a, t_stack *s_b, int *chunks, int n_chun);
+void	bubble_sort(int *values, int size);
+int		get_num_chunks(int size);
 
 #endif
