@@ -6,45 +6,66 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:37 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/06 18:51:31 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/09 22:08:41 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void free_matriz(char **matriz)
+static void	free_matriz(char ***matriz)
 {
-	int i;
+	int	i;
+
 	i = 0;
-	while(matriz[i])
+	if (!matriz || !*matriz)
+		return ;
+	while ((*matriz)[i])
 	{
-		free(matriz[i]);
+		free((*matriz)[i]);
 		i++;
 	}
-	free(matriz);
+	free(*matriz);
+	*matriz = NULL;
 }
+
+static t_stack	*check_and_init_stack(int argc, char **argv)
+{
+	char	**new_argv;
+	char	*str;
+	t_stack	*stack;
+
+	if (argc == 2)
+	{
+		str = ft_strjoin("skip ", argv[1]);
+		if (!str)
+			return (NULL);
+		new_argv = ft_split(str, ' ');
+		if (!new_argv)
+			return (NULL);
+		argc = 0;
+		while (new_argv[argc])
+			argc++;
+		if (!validate_input(argc, new_argv))
+			return (ft_putendl_fd("Error", 2), NULL);
+		stack = init_stack(argc, new_argv);
+		return (free(str), free_matriz(&new_argv), stack);
+	}
+	if (!validate_input(argc, argv))
+		return (ft_putendl_fd("Error", 2), NULL);
+	stack = init_stack(argc, argv);
+	return (stack);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
-	char *str;
 
-	if(argc == 2)
-	{
-		str = ft_strjoin("ignore ", argv[1]);
-		argv = ft_split(str, ' ');
-		free(str);
-		argc = 0;
-		while(argv[argc])
-			argc++;
-	}
-	if (!validate_input(argc, argv))
-		return (ft_putendl_fd("Error",2),EXIT_FAILURE);
-    stack_a = init_stack(argc, argv);
-	free_matriz(argv);
+	stack_a = check_and_init_stack(argc, argv);
+	if (!stack_a)
+		return (EXIT_FAILURE);
 	if (stack_a->size <= 5)
 		sort_small(stack_a);
-	else
-		sort_large(stack_a);
+	free_stack(&stack_a);
 	return (EXIT_SUCCESS);
 }
