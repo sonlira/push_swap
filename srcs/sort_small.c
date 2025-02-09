@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:48 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/06 17:11:06 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/09 22:00:53 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	sort_small(t_stack *stack_a)
 
 	stack_b.top = NULL;
 	stack_b.size = 0;
+	if (!is_an_ordered_list(stack_a))
+		return ;
 	if (!stack_a || stack_a->size < 2)
 		return ;
 	if (stack_a->size == 2)
