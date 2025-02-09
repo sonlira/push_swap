@@ -6,13 +6,13 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:51 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/05 14:34:53 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/09 21:14:11 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node	*new_node(int value)
+t_node	*new_node(int value, int index)
 {
 	t_node	*node;
 
@@ -20,6 +20,8 @@ t_node	*new_node(int value)
 	if (!node)
 		return (NULL);
 	node->value = value;
+	node->index = index;
+	node->prev = NULL;
 	node->next = NULL;
 	return (node);
 }
@@ -28,6 +30,8 @@ void	free_stack(t_stack **stack)
 {
 	t_node	*node;
 
+	if (!stack || !*stack)
+		return ;
 	while ((*stack)->top)
 	{
 		node = (*stack)->top;
