@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:18:58 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/09 21:55:37 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:13:57 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@
 typedef struct s_node
 {
 	int				value;
+	int				target;
 	int				index;
+	int				is_mid_top;
+	int				cost;
+	int				total_cost;
 	struct s_node	*next;
-	struct s_node	*prev;
 }	t_node;
 
 typedef struct s_stack
@@ -41,10 +44,11 @@ int		is_an_ordered_list(t_stack *stack);
 
 t_stack	*init_stack(int argc, char **argv);
 
-t_node	*new_node(int value, int index);
+t_node	*new_node(int value);
 void	free_stack(t_stack **stack);
 int		find_min(t_stack *stack);
-int		find_min_position(t_stack *stack, int min_value);
+int		find_max(t_stack *stack);
+int		find_value_position(t_stack *stack, int min_value);
 void	print_stack(t_stack *stack);
 
 void	swap(t_stack *stack, char *operator);

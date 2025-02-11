@@ -6,13 +6,13 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:51 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/09 21:14:11 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:51:38 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node	*new_node(int value, int index)
+t_node	*new_node(int value)
 {
 	t_node	*node;
 
@@ -20,8 +20,11 @@ t_node	*new_node(int value, int index)
 	if (!node)
 		return (NULL);
 	node->value = value;
-	node->index = index;
-	node->prev = NULL;
+	node->target = 0;
+	node->index = 0;
+	node->is_mid_top = 0;
+	node->cost = -1;
+	node->total_cost = -1;
 	node->next = NULL;
 	return (node);
 }
@@ -74,7 +77,25 @@ int	find_min(t_stack *stack)
 	return (min_value);
 }
 
-int	find_min_position(t_stack *stack, int min_value)
+int	find_max(t_stack *stack)
+{
+	t_node	*nodo;
+	int		max_value;
+
+	if (!stack || !stack->top)
+		return (-1);
+	nodo = stack->top;
+	max_value = nodo->value;
+	while (nodo)
+	{
+		if (max_value < nodo->value)
+			max_value = nodo->value;
+		nodo = nodo->next;
+	}
+	return (max_value);
+}
+
+int	find_value_position(t_stack *stack, int value)
 {
 	t_node	*current;
 	int		rotations;
@@ -83,7 +104,7 @@ int	find_min_position(t_stack *stack, int min_value)
 		return (-1);
 	rotations = 0;
 	current = stack->top;
-	while (current->value != min_value)
+	while (current->value != value)
 	{
 		current = current->next;
 		rotations++;

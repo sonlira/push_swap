@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:48 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/09 22:00:53 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:21:36 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	sort_4(t_stack *stack_a, t_stack *stack_b)
 	int	rotations;
 
 	min_value = find_min(stack_a);
-	rotations = find_min_position(stack_a, min_value);
+	rotations = find_value_position(stack_a, min_value);
 	if (rotations == -1)
 		return ;
 	while (stack_a->top->value != min_value)
@@ -72,7 +72,7 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 	int	rotations;
 
 	min_value = find_min(stack_a);
-	rotations = find_min_position(stack_a, min_value);
+	rotations = find_value_position(stack_a, min_value);
 	if (rotations == -1)
 		return ;
 	while (stack_a->top->value != min_value)
