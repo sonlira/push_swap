@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:37 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/09 22:08:41 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:08:18 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (stack_a->size <= 5)
 		sort_small(stack_a);
+	else
+		sort_large(stack_a);
+	print_stack(stack_a);
 	free_stack(&stack_a);
 	return (EXIT_SUCCESS);
 }

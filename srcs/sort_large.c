@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:45 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/11 18:26:10 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:29:21 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,19 @@
 // {
 
 // }
+
 void	get_total_cost(t_stack *orig, t_stack *dest)
 {
-	t_node *node;
+	t_node *target;
 	t_node *current;
 
 	current = orig->top;
 	while(current)
 	{
-		node = dest->top;
-		while(node->value != current->target)
-			node = node->next;
-		current->total_cost = current->cost + node->cost;
+		target = dest->top;
+		while(target->value != current->target)
+			target = target->next;
+		current->total_cost = current->cost + target->cost;
 		current = current->next;
 	}
 }
@@ -122,21 +123,19 @@ void	get_cost_and_target_to_b(t_stack *stack_a, t_stack *stack_b)
 
 void push_to_b(t_stack *stack_a, t_stack *stack_b)
 {
+	push(stack_a, stack_b, "pb\n");
+	push(stack_a, stack_b, "pb\n");
+	get_cost_and_target_to_b(stack_a, stack_b);
+	get_total_cost(stack_a, stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	// push(stack_a, stack_b, "pb\n");
-	// push(stack_a, stack_b, "pb\n");
-	//get_cost_and_target_to_b(stack_a, stack_b);
-	//get_total_cost(stack_a, stack_b);
-	// print_stack(stack_a);
-	// print_stack(stack_b);
 	t_node *node = stack_a->top;
 	while(node)
 	{
-		printf("node_a %d -> target %d\n",node->value, node->target);
-		printf("cost node_a %d -> total_cost %d\n",node->cost, node->total_cost);
+		printf("stack_a [%d] -> target	   [%d]\n",node->value, node->target);
+		printf("total_cost [%d]\n\n", node->total_cost);
+
 		node = node->next;
-		// printf("value next_node %d\n", node->value);
 	}
 	// while (stack_a->size > 3)
 	// {
@@ -147,7 +146,7 @@ void push_to_b(t_stack *stack_a, t_stack *stack_b)
 void	sort_large(t_stack *stack_a)
 {
 	t_stack	stack_b;
-	if (!is_an_ordered_list(stack_a))
+	if (is_an_ordered_list(stack_a))
 		return ;
 	if (!stack_a || !stack_a->top)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:55 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/09 22:03:56 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:45:39 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,13 @@ int	is_an_ordered_list(t_stack *stack)
 	t_node	*node;
 
 	if (!stack->top || stack->size < 2)
-		return (0);
+		return (1);
 	node = stack->top;
 	while (node->next)
 	{
 		if (node->value > node->next->value)
-			return (1);
+			return (0);
 		node = node->next;
 	}
-	return (0);
+	return (1);
 }
