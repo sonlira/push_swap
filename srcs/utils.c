@@ -6,13 +6,13 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:55 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/11 19:45:39 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:01:03 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atol(const char *str)
+static long	ft_atol(const char *str)
 {
 	long	num;
 	int		sign;
@@ -37,7 +37,7 @@ long	ft_atol(const char *str)
 	return (num * sign);
 }
 
-int	is_valid_number(char *str)
+static int	is_valid_number(char *str)
 {
 	int		i;
 	long	num;
@@ -59,7 +59,7 @@ int	is_valid_number(char *str)
 	return (1);
 }
 
-int	has_duplicates(char **argv)
+static int	has_duplicates(char **argv)
 {
 	int	i;
 	int	j;

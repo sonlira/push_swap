@@ -6,110 +6,30 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:45 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/11 20:29:21 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:58:00 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// int	*copy_stack_to_array(t_stack *stack)
-// {
-// 	t_node	*node;
-// 	int		*arr;
-// 	int		i;
-
-// 	node = stack->top;
-// 	arr = malloc(sizeof(int) * stack->size);
-// 	if (!arr)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < stack->size)
-// 	{
-// 		arr[i] = node->value;
-// 		node = node->next;
-// 		i++;
-// 	}
-// 	return (arr);
-// }
-
-// int	*define_chuks(int *arr, int size, int num_chunks)
-// {
-// 	int		chunks_size;
-// 	int		*chunks;
-// 	int		i;
-
-// 	chunks_size = size / num_chunks;
-// 	chunks = malloc(sizeof(int) * num_chunks);
-// 	if (!chunks)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < num_chunks - 1)
-// 	{
-// 		chunks[i] = arr[(i + 1) * chunks_size - 1];
-// 		i++;
-// 	}
-// 	chunks[num_chunks - 1] = arr[size - 1];
-// 	return (chunks);
-// }
-
-// void	move_chunks_to_b(t_stack *s_a, t_stack *s_b, int *chunks, int n_chun)
-// {
-
-// }
-
-void	get_total_cost(t_stack *orig, t_stack *dest)
+static void	get_cost_and_target_to_b(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node *target;
-	t_node *current;
-
-	current = orig->top;
-	while(current)
-	{
-		target = dest->top;
-		while(target->value != current->target)
-			target = target->next;
-		current->total_cost = current->cost + target->cost;
-		current = current->next;
-	}
-}
-
-void	get_cost_to_move(t_stack *stack)
-{
-	t_node *current;
-	
-	current = stack->top;
-	while (current)
-	{
-		current->index = find_value_position(stack, current->value);
-		if(current->index <= stack->size / 2)
-		{
-			current->is_mid_top = 1;
-			current->cost = current->index;
-		}
-		else
-			current->cost = stack->size - current->index;
-		current = current->next;
-	}
-}
-
-void	get_cost_and_target_to_b(t_stack *stack_a, t_stack *stack_b)
-{
-	t_node *node;
-	t_node *current;
-	int		target;
-	int		min_prox;
+	t_node	*node;
+	t_node	*current;
+	t_node	*target;
+	t_node	*min_prox;
 
 	current = stack_a->top;
-	while(current)
+	while (current)
 	{
 		node = stack_b->top;
 		target = find_max(stack_b);
 		min_prox = find_min(stack_b);
-		while(node)
+		while (node)
 		{
-			if(node->value < current->value && node->value >= min_prox)
+			if (node->value < current->value && node->value >= min_prox->value)
 			{
-				min_prox = node->value;
+				min_prox = node;
 				target = min_prox;
 			}
 			node = node->next;
@@ -121,38 +41,86 @@ void	get_cost_and_target_to_b(t_stack *stack_a, t_stack *stack_b)
 	get_cost_to_move(stack_b);
 }
 
-void push_to_b(t_stack *stack_a, t_stack *stack_b)
+static void	get_cost_and_target_to_a(t_stack *stack_b, t_stack *stack_a)
 {
-	push(stack_a, stack_b, "pb\n");
-	push(stack_a, stack_b, "pb\n");
-	get_cost_and_target_to_b(stack_a, stack_b);
-	get_total_cost(stack_a, stack_b);
-	print_stack(stack_a);
-	print_stack(stack_b);
-	t_node *node = stack_a->top;
-	while(node)
+	t_node	*node;
+	t_node	*current;
+	t_node	*target;
+	t_node	*max_prox;
+
+	current = stack_b->top;
+	while (current)
 	{
-		printf("stack_a [%d] -> target	   [%d]\n",node->value, node->target);
-		printf("total_cost [%d]\n\n", node->total_cost);
-
-		node = node->next;
+		node = stack_a->top;
+		target = find_min(stack_a);
+		max_prox = find_max(stack_a);
+		while (node)
+		{
+			if (node->value > current->value && node->value <= max_prox->value)
+			{
+				max_prox = node;
+				target = max_prox;
+			}
+			node = node->next;
+		}
+		current->target = target;
+		current = current->next;
 	}
-	// while (stack_a->size > 3)
-	// {
+	get_cost_to_move(stack_a);
+	get_cost_to_move(stack_b);
+}
 
-	// }
+static void	push_to_b(t_stack *stack_a, t_stack *stack_b)
+{
+	t_node	*low_cost;
+
+	push(stack_a, stack_b, "pb\n");
+	push(stack_a, stack_b, "pb\n");
+	while (stack_a->size > 3)
+	{
+		get_cost_and_target_to_b(stack_a, stack_b);
+		get_total_cost(stack_a);
+		low_cost = get_the_lowest_cost(stack_a);
+		move_up_with_b(stack_a, stack_b, low_cost);
+		push(stack_a, stack_b, "pb\n");
+	}
+}
+
+static void	push_to_a(t_stack *stack_b, t_stack *stack_a)
+{
+	sort_3(stack_a);
+	while (stack_b->size > 0)
+	{
+		get_cost_and_target_to_a(stack_b, stack_a);
+		get_total_cost(stack_a);
+		while (stack_a->top->value != stack_b->top->target->value)
+		{
+			if (stack_b->top->target->is_mid_top)
+				rotate(stack_a, "ra\n");
+			else
+				reverse_rotate(stack_a, "rra\n");
+		}
+		push(stack_b, stack_a, "pa\n");
+	}
+	while (stack_a->top->value != find_min(stack_a)->value)
+	{
+		if (find_min(stack_a)->is_mid_top)
+			rotate(stack_a, "ra\n");
+		else
+			reverse_rotate(stack_a, "rra\n");
+	}
 }
 
 void	sort_large(t_stack *stack_a)
 {
 	t_stack	stack_b;
+
 	if (is_an_ordered_list(stack_a))
 		return ;
 	if (!stack_a || !stack_a->top)
 		return ;
 	stack_b.size = 0;
 	stack_b.top = NULL;
-	print_stack(stack_a);
-	print_stack(&stack_b);
 	push_to_b(stack_a, &stack_b);
+	push_to_a(&stack_b, stack_a);
 }

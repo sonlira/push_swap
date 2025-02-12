@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:48 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/11 20:47:29 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:10:27 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	sort_3(t_stack *stack)
 
 void	sort_4(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min_value;
-	int	rotations;
+	t_node	*min_value;
+	int		rotations;
 
 	min_value = find_min(stack_a);
-	rotations = find_value_position(stack_a, min_value);
+	rotations = find_value_position(stack_a, min_value->value);
 	if (rotations == -1)
 		return ;
-	while (stack_a->top->value != min_value)
+	while (stack_a->top->value != min_value->value)
 	{
 		if (rotations <= stack_a->size / 2)
 			rotate(stack_a, "ra\n");
@@ -68,14 +68,14 @@ void	sort_4(t_stack *stack_a, t_stack *stack_b)
 
 void	sort_5(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min_value;
-	int	rotations;
+	t_node	*min_value;
+	int		rotations;
 
 	min_value = find_min(stack_a);
-	rotations = find_value_position(stack_a, min_value);
+	rotations = find_value_position(stack_a, min_value->value);
 	if (rotations == -1)
 		return ;
-	while (stack_a->top->value != min_value)
+	while (stack_a->top->value != min_value->value)
 	{
 		if (rotations <= stack_a->size / 2)
 			rotate(stack_a, "ra\n");

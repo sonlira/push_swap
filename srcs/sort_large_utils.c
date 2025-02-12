@@ -6,44 +6,74 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:14:13 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/11 15:23:44 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:03:39 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void	bubble_sort(int *values, int size)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	tmp;
+void	rr(t_stack *stack_a, t_stack *stack_b)
+{
+	rotate(stack_a, "");
+	rotate(stack_b, "rr\n");
+}
 
-// 	i = 0;
-// 	j = 0;
-// 	while (i < size)
-// 	{
-// 		j = i + 1;
-// 		while (j < size)
-// 		{
-// 			if (values[j] < values[i])
-// 			{
-// 				tmp = values[i];
-// 				values[i] = values[j];
-// 				values[j] = tmp;
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+void	rrr(t_stack *stack_a, t_stack *stack_b)
+{
+	reverse_rotate(stack_a, "");
+	reverse_rotate(stack_b, "rrr\n");
+}
 
-// int	get_num_chunks(int size)
-// {
-// 	if (size >= 6 && size <= 9)
-// 		return (3);
-// 	else if (size >= 10 && size <= 100)
-// 		return (5);
-// 	else if (size >= 101 && size <= 250)
-// 		return (7);
-// 	return (10);
-// }
+void	get_total_cost(t_stack *stack)
+{
+	t_node	*target;
+	t_node	*current;
+
+	current = stack->top;
+	while (current)
+	{
+		target = current->target;
+		current->total_cost = current->cost + target->cost;
+		current = current->next;
+	}
+}
+
+void	get_cost_to_move(t_stack *stack)
+{
+	t_node	*current;
+
+	current = stack->top;
+	while (current)
+	{
+		current->index = find_value_position(stack, current->value);
+		if (current->index <= stack->size / 2)
+		{
+			current->is_mid_top = 1;
+			current->cost = current->index;
+		}
+		else
+		{
+			current->is_mid_top = 0;
+			current->cost = stack->size - current->index;
+		}
+		current = current->next;
+	}
+}
+
+t_node	*get_the_lowest_cost(t_stack *stack)
+{
+	t_node	*low_cost;
+	t_node	*current;
+
+	current = stack->top;
+	low_cost = current;
+	while (current)
+	{
+		if (current->total_cost == 0)
+			return (current);
+		else if (current->total_cost < low_cost->total_cost)
+			low_cost = current;
+		current = current->next;
+	}
+	return (low_cost);
+}

@@ -6,11 +6,28 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:49:38 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/11 18:13:56 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:33:20 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_node	*new_node(int value)
+{
+	t_node	*node;
+
+	node = malloc(sizeof(t_node));
+	if (!node)
+		return (NULL);
+	node->value = value;
+	node->index = 0;
+	node->is_mid_top = 0;
+	node->cost = -1;
+	node->total_cost = -1;
+	node->target = NULL;
+	node->next = NULL;
+	return (node);
+}
 
 static void	create_nodes(t_stack *stack, int size, char **values)
 {
