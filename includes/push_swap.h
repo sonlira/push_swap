@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:18:58 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/12 13:46:36 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:42:10 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_node
 {
 	int				value;
 	int				index;
-	int				is_mid_top;
+	int				u_half;
 	int				cost;
 	int				total_cost;
 	struct s_node	*target;

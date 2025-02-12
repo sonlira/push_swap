@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:04:14 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/12 13:30:38 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:44:53 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,39 @@ static int	validate_arguments(t_stack *stack_a, t_stack *stack_b, t_node *node)
 	return (1);
 }
 
-void	move_up_with_b(t_stack *sa, t_stack *sb, t_node *no)
+void	move_up_with_b(t_stack *a, t_stack *b, t_node *n)
 {
-	t_node	*ta;
-	t_node	*tsb;
+	t_node	*t;
+	t_node	*f;
 
-	if (!validate_arguments(sa, sb, no))
+	if (!validate_arguments(a, b, n))
 		return ;
-	ta = no->target;
-	while (sa->top->value != no->value)
+	t = n->target;
+	while (a->top->value != n->value)
 	{
-		tsb = sb->top;
-		if ((!no->is_mid_top && !ta->is_mid_top) && tsb->value != ta->value)
-			rr(sa, sb);
-		else if ((no->is_mid_top && ta->is_mid_top) && tsb->value != ta->value)
-			rrr(sa, sb);
-		else if (no->is_mid_top)
-			rotate(sa, "ra\n");
+		f = b->top;
+		if ((n->u_half == 1 && t->u_half == 1) && f->value != t->value)
+			rr(a, b);
+		else if ((n->u_half == 0 && t->u_half == 0) && f->value != t->value)
+			rrr(a, b);
+		else if (n->u_half)
+			rotate(a, "ra\n");
 		else
-			reverse_rotate(sa, "rra\n");
+			reverse_rotate(a, "rra\n");
 	}
-	while (sb->top->value != ta->value)
+	while (b->top->value != t->value)
 	{
-		if (ta->is_mid_top)
-			rotate(sb, "rb\n");
+		if (t->u_half)
+			rotate(b, "rb\n");
 		else
-			reverse_rotate(sb, "rrb\n");
+			reverse_rotate(b, "rrb\n");
 	}
 }
 
 /*
-	sa = stack_a
-	sb = stack_b
-	no = node;
-	ta = target;
-	tsb = top_stack_b
+	a = stack_a
+	b = stack_b
+	n = node;
+	t = target;
+	f = first_node_to_b
 */

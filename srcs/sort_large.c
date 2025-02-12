@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:20:45 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/12 12:58:00 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:42:06 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	push_to_a(t_stack *stack_b, t_stack *stack_a)
 		get_total_cost(stack_a);
 		while (stack_a->top->value != stack_b->top->target->value)
 		{
-			if (stack_b->top->target->is_mid_top)
+			if (stack_b->top->target->u_half)
 				rotate(stack_a, "ra\n");
 			else
 				reverse_rotate(stack_a, "rra\n");
@@ -104,7 +104,7 @@ static void	push_to_a(t_stack *stack_b, t_stack *stack_a)
 	}
 	while (stack_a->top->value != find_min(stack_a)->value)
 	{
-		if (find_min(stack_a)->is_mid_top)
+		if (find_min(stack_a)->u_half)
 			rotate(stack_a, "ra\n");
 		else
 			reverse_rotate(stack_a, "rra\n");

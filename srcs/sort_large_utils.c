@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:14:13 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/12 13:03:39 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:42:06 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	get_cost_to_move(t_stack *stack)
 		current->index = find_value_position(stack, current->value);
 		if (current->index <= stack->size / 2)
 		{
-			current->is_mid_top = 1;
+			current->u_half = 1;
 			current->cost = current->index;
 		}
 		else
 		{
-			current->is_mid_top = 0;
+			current->u_half = 0;
 			current->cost = stack->size - current->index;
 		}
 		current = current->next;

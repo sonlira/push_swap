@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:49:38 by abaldelo          #+#    #+#             */
-/*   Updated: 2025/02/12 13:33:20 by abaldelo         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:42:06 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node	*new_node(int value)
 		return (NULL);
 	node->value = value;
 	node->index = 0;
-	node->is_mid_top = 0;
+	node->u_half = 0;
 	node->cost = -1;
 	node->total_cost = -1;
 	node->target = NULL;
